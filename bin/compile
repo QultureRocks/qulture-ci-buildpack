@@ -4,24 +4,27 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 
-echo "Building Google Chrome"
+# this pack is valid for master, develop and branches that end on e2e
+if [ "$HEROKU_TEST_RUN_BRANCH" == "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" == "develop" ] || [[ "$HEROKU_TEST_RUN_BRANCH" == *e2e ]]; then
+  echo "Building Google Chrome"
 
-heroku_google_chrome_buildpack_git="https://github.com/heroku/heroku-buildpack-google-chrome.git"
-chrome_buildpack_dir="heroku-chrome"
+  heroku_google_chrome_buildpack_git="https://github.com/heroku/heroku-buildpack-google-chrome.git"
+  chrome_buildpack_dir="heroku-chrome"
 
-# clone the repo
-git clone $heroku_google_chrome_buildpack_git $chrome_buildpack_dir
-# compile the buildpack
-$chrome_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
+  # clone the repo
+  git clone $heroku_google_chrome_buildpack_git $chrome_buildpack_dir
+  # compile the buildpack
+  $chrome_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
 
-echo "Building Chromedriver"
+  echo "Building Chromedriver"
 
-heroku_chromedriver_buildpack_git="https://github.com/heroku/heroku-buildpack-chromedriver.git"
-chromedriver_buildpack_dir="heroku-chromedriver"
+  heroku_chromedriver_buildpack_git="https://github.com/heroku/heroku-buildpack-chromedriver.git"
+  chromedriver_buildpack_dir="heroku-chromedriver"
 
-# clone the repo
-git clone $heroku_chromedriver_buildpack_git $chromedriver_buildpack_dir
-# compile the buildpack
-$chromedriver_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
+  # clone the repo
+  git clone $heroku_chromedriver_buildpack_git $chromedriver_buildpack_dir
+  # compile the buildpack
+  $chromedriver_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
+fi
 
 EOF
