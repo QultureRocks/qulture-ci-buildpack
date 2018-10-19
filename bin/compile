@@ -25,4 +25,6 @@ if [ "$HEROKU_TEST_RUN_BRANCH" = "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" = "de
   git clone $heroku_chromedriver_buildpack_git $chromedriver_buildpack_dir
   # compile the buildpack
   $chromedriver_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
+else
+  echo "Branch is not elegible for compilations"
 fi
