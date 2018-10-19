@@ -3,7 +3,7 @@
 build_dir=$1
 cache_dir=$2
 env_dir=$3
-$branch_name=$(cat $env_dir/HEROKU_TEST_RUN_BRANCH)
+branch_name=$(cat $env_dir/HEROKU_TEST_RUN_BRANCH)
 
 ls $env_dir
 
