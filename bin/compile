@@ -4,6 +4,8 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 
+echo "BRANCH NAME = $HEROKU_TEST_RUN_BRANCH"
+
 # this pack is valid for master, develop and branches that end on e2e
 if [ "$HEROKU_TEST_RUN_BRANCH" == "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" == "develop" ] || [[ "$HEROKU_TEST_RUN_BRANCH" == *e2e ]]; then
   echo "Building Google Chrome"
