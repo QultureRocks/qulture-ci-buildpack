@@ -5,7 +5,7 @@ cache_dir=$2
 env_dir=$3
 
 # this pack is valid for master, develop and branches that end on e2e
-if [ "$HEROKU_TEST_RUN_BRANCH" == "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" == "develop" ] || [[ "$HEROKU_TEST_RUN_BRANCH" == *e2e ]]; then
+if [ "$HEROKU_TEST_RUN_BRANCH" = "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" = "develop" ] || [ "$HEROKU_TEST_RUN_BRANCH" = *e2e ]; then
   echo "Building Google Chrome"
 
   heroku_google_chrome_buildpack_git="https://github.com/heroku/heroku-buildpack-google-chrome.git"
@@ -26,5 +26,3 @@ if [ "$HEROKU_TEST_RUN_BRANCH" == "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" == "
   # compile the buildpack
   $chromedriver_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
 fi
-
-EOF
