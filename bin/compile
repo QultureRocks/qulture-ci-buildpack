@@ -3,12 +3,13 @@
 build_dir=$1
 cache_dir=$2
 env_dir=$3
+$branch_name=$env_dir/HEROKU_TEST_RUN_BRANCH
 
-echo "BRANCH NAME = $HEROKU_TEST_RUN_BRANCH"
-printenv
+echo "BRANCH NAME = $branch_name"
+echo "ENV_DIR $3"
 
 # this pack is valid for master, develop and branches that end on e2e
-if [ "$HEROKU_TEST_RUN_BRANCH" == "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" == "develop" ] || [[ "$HEROKU_TEST_RUN_BRANCH" == *e2e ]]; then
+if [ "$branch_name" == "master" ] || [ "$branch_name" == "develop" ] || [[ "$branch_name" == *e2e ]]; then
   echo "Building Google Chrome"
 
   heroku_google_chrome_buildpack_git="https://github.com/heroku/heroku-buildpack-google-chrome.git"
