@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# this pack is valid for master, develop and branches that end on e2e
+if [ "$HEROKU_TEST_RUN_BRANCH" == "master" ] || [ "$HEROKU_TEST_RUN_BRANCH" == "develop" ] || [[ "$HEROKU_TEST_RUN_BRANCH" == *e2e ]]; then
+  echo "QultureCI"
+  exit 0
+else
+  exit 1
+fi
