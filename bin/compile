@@ -12,24 +12,26 @@ echo "ENV_DIR $3"
 
 # this pack is valid for master, develop and branches that end on e2e
 if [ "$branch_name" == "master" ] || [ "$branch_name" == "develop" ] || [[ "$branch_name" == *e2e ]]; then
-  echo "Building Google Chrome"
 
   heroku_google_chrome_buildpack_git="https://github.com/heroku/heroku-buildpack-google-chrome.git"
   chrome_buildpack_dir="heroku-chrome"
 
   # clone the repo
+  echo "Cloning Google Chrome"
   git clone $heroku_google_chrome_buildpack_git $chrome_buildpack_dir
   # compile the buildpack
+  echo "Compiling Google Chrome"
   $chrome_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
-
-  echo "Building Chromedriver"
 
   heroku_chromedriver_buildpack_git="https://github.com/heroku/heroku-buildpack-chromedriver.git"
   chromedriver_buildpack_dir="heroku-chromedriver"
 
   # clone the repo
+  echo "Cloning Chromedriver"
   git clone $heroku_chromedriver_buildpack_git $chromedriver_buildpack_dir
   # compile the buildpack
+  echo "Compiling Chromedriver"
+  chmod 755 $chromedriver_buildpack_dir/bin/compile
   $chromedriver_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
 else
   echo "Branch is not elegible for compilations"
