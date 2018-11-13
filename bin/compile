@@ -16,7 +16,7 @@ if [ "$branch_name" == "master" ] || [ "$branch_name" == "develop" ] || [[ "$bra
   git clone $heroku_google_chrome_buildpack_git $chrome_buildpack_dir
   # compile the buildpack
   echo "Compiling Google Chrome"
-  $chrome_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
+  $chrome_buildpack_dir/bin/compile $build_dir $cache_dir $env_dir
 
   heroku_chromedriver_buildpack_git="https://github.com/heroku/heroku-buildpack-chromedriver.git"
   chromedriver_buildpack_dir="heroku-chromedriver"
@@ -27,7 +27,7 @@ if [ "$branch_name" == "master" ] || [ "$branch_name" == "develop" ] || [[ "$bra
   # compile the buildpack
   echo "Compiling Chromedriver"
   chmod 755 $chromedriver_buildpack_dir/bin/compile
-  $chromedriver_buildpack_dir/bin/compile $build_dird $cache_dir $env_dir
+  $chromedriver_buildpack_dir/bin/compile $build_dir $cache_dir $env_dir
 else
   echo "Branch is not elegible for compilations"
 fi
