@@ -1,12 +1,12 @@
 #!/bin/bash
 
-build_dir=$1
-cache_dir=$2
-env_dir=$3
-branch_name=$(cat $env_dir/HEROKU_TEST_RUN_BRANCH)
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+BRANCH_NAME=$(cat $ENV_DIR/HEROKU_TEST_RUN_BRANCH)
 
 # this pack is valid for master, develop and branches that end on e2e
-if [ "$branch_name" == "master" ] || [ "$branch_name" == "develop" ] || [[ "$branch_name" == *e2e ]]; then
+if [ "$BRANCH_NAME" == "master" ] || [ "$BRANCH_NAME" == "develop" ] || [[ "$BRANCH_NAME" == *e2e ]]; then
 
   heroku_google_chrome_buildpack_git="https://github.com/heroku/heroku-buildpack-google-chrome.git"
   chrome_buildpack_dir="heroku-chrome"
@@ -16,7 +16,7 @@ if [ "$branch_name" == "master" ] || [ "$branch_name" == "develop" ] || [[ "$bra
   git clone $heroku_google_chrome_buildpack_git $chrome_buildpack_dir
   # compile the buildpack
   echo "Compiling Google Chrome"
-  $chrome_buildpack_dir/bin/compile $build_dir $cache_dir $env_dir
+  $chrome_buildpack_dir/bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR
 
   heroku_chromedriver_buildpack_git="https://github.com/heroku/heroku-buildpack-chromedriver.git"
   chromedriver_buildpack_dir="heroku-chromedriver"
@@ -27,7 +27,7 @@ if [ "$branch_name" == "master" ] || [ "$branch_name" == "develop" ] || [[ "$bra
   # compile the buildpack
   echo "Compiling Chromedriver"
   chmod 755 $chromedriver_buildpack_dir/bin/compile
-  $chromedriver_buildpack_dir/bin/compile $build_dir $cache_dir $env_dir
+  $chromedriver_buildpack_dir/bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR
 else
   echo "Branch is not elegible for compilations"
 fi
